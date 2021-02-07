@@ -1,0 +1,52 @@
+.coursePageView{
+    margin-top: 4rem;
+    position: fixed;
+    z-index: 9;
+    margin-left:15rem;
+}
+
+.courseDowndrop {
+    margin-top: 4rem;
+    position: fixed;
+    z-index: 9;
+    margin-top: -15rem;
+}
+
+#assignmentTable, #quizTable{
+    display: inline-block;
+    margin-top: 3rem;
+    /* border: 1px solid red; */
+}
+
+#quizTable{
+    vertical-align:top;
+}
+
+#coursePicker {
+    position: fixed;
+    z-index: -1;
+    margin-top: 1rem;
+}
+
+#assignmentDetails{
+    width: 75%;
+    display: inline-block;
+}
+
+#updateGradeBtn{
+    z-index: 1;
+    position: fixed;
+    margin-left: 14rem;
+}
+
+#cctext{
+    position: relative;
+    z-index: 1;
+    left: -1rem;
+    bottom: 0.5rem;
+}
+
+#studentPicker{
+    position: absolute;
+    top: 1rem;
+}

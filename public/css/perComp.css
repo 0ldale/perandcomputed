@@ -1,0 +1,161 @@
+.contentLink .nav-link {
+  padding: .25rem 0;
+  color: #303030;
+  background-color: transparent;
+    border-bottom: .25rem solid #7da7da;
+  font-size: 28px;
+    letter-spacing: 0.1em;
+}
+
+.contentLink .nav-link:hover,
+.contentLink .nav-link:focus {
+  border-color: #7accc8;
+}
+
+#forgotDiv{
+    margin-top: -2%;
+    margin-bottom: -2%;
+}
+
+/* main register button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+} 
+button {
+  border: 2px solid #BFC0C0;
+  color: #BFC0C0;
+  text-decoration: none;
+  font-size: .8em;
+  letter-spacing: 1.5px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+button a {
+  position: relative;
+  transition: all .45s ease-Out;
+}
+#underline {
+  width: 100%;
+  height: 2.5px;
+  margin-top: 15px;
+  align-self: flex-end;
+  left: -200px;
+  background: #8e8d8a;
+  position: absolute;
+  transition: all .3s ease-Out;
+  bottom: 0;
+}
+button:hover #underline {
+  left: 0;
+}
+
+
+/* general */
+html,
+body {
+    height: 100%;
+    /*BACKGROUND-COLOR: #eae7dc;*/
+    BACKGROUND-COLOR: #dadada;
+    font-family: calibri;
+    color: #000;
+    font-variant: small-caps;
+}
+body {
+  display: -ms-flexbox;
+  display: flex;
+  color: #000;
+}
+.cover-container {
+  max-width: 42em;
+}
+a{
+  cursor: pointer;
+}
+
+
+/* header logo */
+.masthead {
+  margin-bottom: 2rem;
+}
+.masthead-brand {
+  margin-bottom: 0;
+    letter-spacing: 0.1em;
+    /*color: #d79922;*/
+    COLOR: #7DA7DA;
+    font-variant: small-caps;
+}
+
+/* header links */
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: #303030;
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+    font-size: 18px;
+}
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  /*border-bottom-color: #d79922;*/
+    BORDER-BOTTOM-COLOR: #7DA7DA;
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.nav-masthead .active {
+  color: #303030;
+  border-bottom-color: #7DA7DA;
+}
+
+@media (min-width: 48em) {
+  .masthead-brand {
+    float: left;
+  }
+  .nav-masthead {
+    float: right;
+  }
+}
+
+
+
+/* description cover.html */
+.cover-heading{
+    color: #303030;
+    font-size: 30px;
+    font-style: oblique;
+}
+.lead {
+  padding: 0 1.5rem;
+    color: #303030;
+    font-size: 25px;
+}
+.cover .btn-lg {
+  padding: .75rem 1.25rem;
+  font-weight: 700;
+}
+
+/* about page container */
+#about-container{
+    margin-top: -13.5%;
+    font-size: 20px;
+}
+
+/* footer */
+.mastfoot {
+  color: #303030;
+}
+
+.hidden {
+    display: none;
+}
