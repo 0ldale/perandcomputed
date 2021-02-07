@@ -1,0 +1,130 @@
+<!doctype html>
+<!-- 
+elizabeth southward 2020
+the login page for per&computed
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+   
+    <title>percomp login</title>
+
+     <!-- Bootstrap core CSS -->
+     <link href="./css/bootstrap.css" rel="stylesheet">
+     <!-- Custom styles for this template -->
+     <link href="./css/perComp.css" rel="stylesheet">
+     <link href="./css/fade.css" rel="stylesheet">
+ 
+     <!-- update the version number as needed -->
+     <script defer src="/__/firebase/7.24.0/firebase-app.js"></script>
+     <!-- include only the Firebase features as you need -->
+     <script defer src="/__/firebase/7.24.0/firebase-auth.js"></script>
+     <!-- <script defer src="/__/firebase/7.24.0/firebase-database.js"></script> -->
+     <script defer src="/__/firebase/7.24.0/firebase-firestore.js"></script>
+     <script defer src="/__/firebase/7.24.0/firebase-messaging.js"></script>
+     <script defer src="/__/firebase/7.24.0/firebase-storage.js"></script>
+     <script defer src="/__/firebase/7.24.0/firebase-analytics.js"></script>
+     <script defer src="/__/firebase/7.24.0/firebase-remote-config.js"></script>
+     <script defer src="/__/firebase/7.24.0/firebase-performance.js"></script>
+     <!-- initialize the SDK after all desired features are loaded -->
+     <script defer src="/__/firebase/init.js"></script>
+     <!-- The core Firebase JS SDK is always required and must be listed first -->
+     <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js"></script>
+
+     <!-- javascript files -->
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+     <script src="./js/bootstrap.js"></script>
+     <script src="./js/perComp.js"></script>    
+     <script src="./js/process.js"></script>
+   </head>
+    
+  <body class="text-center">
+      
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+ 
+    <!-- top head -->
+    <header class="masthead mb-auto">
+    <div class="inner">
+      <h3 class="masthead-brand">per&computed</h3>
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link" href="index.html">home</a>
+        <a class="nav-link active" href="login.html" id="loginUserLink">login</a>
+        <a class="nav-link" href="about.html">about</a>
+        <a class="nav-link" href="calculate.html">calculators</a>
+        <!-- <a class="nav-link" id="logoutUserLink" onclick="logoutUser()">logoff</a> -->
+      </nav>
+    </div>
+    </header>
+
+<!-- main content -->
+<div id="loginForm">
+<form id="mainFade" class="loginForm" method="get">
+    <p><span id="loginerr" style="color: red;"></span></p>
+    <div class="form-group row">
+        <label for="inputEmail" class="col-sm-2 col-form-label">email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail">
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">password</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword">
+        </div> 
+    </div>     
+
+    <div class="d-flex justify-content-end">
+        <div class=""></div>
+        <div class="" id="forgotDiv">
+            <a class="masthead-brand nav-link justify-content-start" id="contentLink" onclick="showForgotten()">forgot password</a>
+        </div>
+    </div>
+    <div>
+        <a class="nav-link" id="loginUser" onclick="login()">login</a>
+        <!-- <button class="btn btn-lg btn-secondary justify-content-center" id="enterButton" onclick="checkCredentials()"><div id="underline"></div>login</button> -->
+    </div>
+</form>
+    </div>
+        
+<div id="forgotPwForm" class="hidden">
+<form id="mainFade">
+    <p><span id="success" style="visibility: hidden;">An email has been sent with instructions to reset your password.</span></p>
+    <p><span id="err" style="color: red;"></span></p>
+    <div class="form-group row">
+        <label for="inputEmail" class="col-sm-2 col-form-label">email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmailReset">
+        </div>
+    </div>
+        <div class="d-flex justify-content-end">
+        <div class=""></div>
+        <div class="" id="forgotDiv">
+            <a class="masthead-brand nav-link justify-content-start" id="contentLink" onclick="showLogin()">login</a>
+        </div>
+    </div>
+    <div>
+        <a class="nav-link" id="resetBtn" onclick="forgotPassword()">reset</a>
+        <!-- <button class="btn btn-lg btn-secondary justify-content-center" id="enterButton" onclick="forgotPassword()"><div id="underline"></div>reset</button> -->
+    </div>
+</form>        
+</div>
+        
+        
+<!-- footer -->
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+        <p>(c) 2020</p>
+    </div>
+</footer>
+        
+</div>
+
+
+</body>
+</html>

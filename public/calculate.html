@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+   
+    <title>per&computed</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./css/perComp.css" rel="stylesheet">
+    <link href="./css/fade.css" rel="stylesheet">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.24.0/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.24.0/firebase-auth.js"></script>
+    <!-- <script defer src="/__/firebase/7.24.0/firebase-database.js"></script> -->
+    <script defer src="/__/firebase/7.24.0/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/7.24.0/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.24.0/firebase-storage.js"></script>
+    <script defer src="/__/firebase/7.24.0/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/7.24.0/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/7.24.0/firebase-performance.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <!-- javascript files -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/perComp.js"></script>    
+    <script src="/js/process.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./app.js"></script>
+    <script src="./js/calculations.js"></script>
+</head>
+
+<body class="text-center">
+    <script>
+        document.addEventListener("DOMContentLoaded", event =>{
+            firebase.auth().onAuthStateChanged(firebaseUser => {
+                if(firebaseUser){
+                    // show authorized links
+                    document.getElementById("unauthNav").style.display = "none"
+                    document.getElementById("authNav").style.visibility = "visible"
+                } else {
+                    // show unathorized links
+                    document.getElementById("authNav").style.display = "none"
+                    document.getElementById("unauthNav").style.visibility = "visible"
+                }
+            })
+        });
+
+
+    </script>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+ 
+    <!-- top head -g -->
+    <header class="masthead mb-auto">
+    <div class="inner">
+      <h3 class="masthead-brand">per&computed</h3>
+      <nav class="nav nav-masthead justify-content-center" id="unauthNav" style="visibility: hidden;">
+        <a class="nav-link" href="index.html" id="homeLink">home</a>
+        <a class="nav-link" href="login.html" id="loginLink">login</a>
+        <a class="nav-link" href="about.html" id="aboutLink">about</a>
+        <a class="nav-link active" href="calculate.html">calculators</a>
+      </nav>
+      <nav class="nav nav-masthead justify-content-center" id="authNav" style="visibility: hidden;">
+        <a class="nav-link" href="memberIndex.html" id="memberHomeLink">home</a>
+        <a class="nav-link" href="courses.html" id="courseLink">courses</a>
+        <a class="nav-link active" href="calculate.html">calculators</a>
+        <a class="nav-link" href="settings.html" id="settingsLink">settings</a>
+        <a class="nav-link" id="logoutUserLink" onclick="logoutUser()">logoff</a>
+      </nav>
+    </div>
+    </header>
+
+    <!-- main content for class average -->
+    <div id="mainFade">
+
+    <!-- radio buttons for class average / gpa picker -->
+    <div id="radios">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="calculatorSwitch" id="courseRadio" value="courseAverage" checked onchange="changeView()">
+            <label class="form-check-label" for="courseRadio">
+                Course Average
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="calculatorSwitch" id="GPARadio" value="GPAAverage" onchange="changeView()">
+            <label class="form-check-label" for="GPARadio">
+                GPA
+            </label>
+        </div>
+    </div>
+
+    <main role="main" class="inner cover" id="avgCalc">  
+        <div id="gradeTable">      
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Assignment</th>
+                        <th scope="col">Grade</th>
+                        <th scope="col">Weight</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td><input type="number" id="gscore" name="g_score_1" value="" class="number_entry_box"></td>
+                        <td><input type="number" id="gweight" name="g_weight_1" value="" class="number_entry_box"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td><input type="number" id="gscore" name="g_score_2" value="" class="number_entry_box"></td>
+                        <td><input type="number" id="gweight" name="g_weight_2" value="" class="number_entry_box"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td><input type="number" id="gscore" name="g_score_3" value="" class="number_entry_box"></td>
+                        <td><input type="number" id="gweight" name="g_weight_3" value="" class="number_entry_box"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td><input type="number" id="gscore" name="g_score_4" value="" class="number_entry_box"></td>
+                        <td><input type="number" id="gweight" name="g_weight_4" value="" class="number_entry_box"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td><input type="number" id="gscore" name="g_score_5" value="" class="number_entry_box"></td>
+                        <td><input type="number" id="gweight" name="g_weight_5" value="" class="number_entry_box"></td>
+                    </tr>
+                    <tr>
+                    <th scope="row">6</th>
+                    <td><input type="number" id="gscore" name="g_score_6" value="" class="number_entry_box"></td>
+                    <td><input type="number" id="gweight" name="g_weight_6" value="" class="number_entry_box"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">7</th>
+                        <td><input type="number" id="gscore" name="g_score_7" value="" class="number_entry_box"></td>
+                        <td><input type="number" id="gweight" name="g_weight_7" value="" class="number_entry_box"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">8</th>
+                        <td><input type="number" id="gscore" name="g_score_8" value="" class="number_entry_box"></td>
+                        <td><input type="number" id="gweight" name="g_weight_8" value="" class="number_entry_box"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">9</th>
+                        <td><input type="number" id="gscore" name="g_score_9" value="" class="number_entry_box"></td>
+                        <td><input type="number" id="gweight" name="g_weight_9" value="" class="number_entry_box"></td>
+                    </tr>
+                    <tr>
+                    <th scope="row">10</th>
+                        <td><input type="number" id="gscore" name="g_score_10" value="" class="number_entry_box"></td>
+                        <td><input type="number" id="gweight" name="g_weight_10" value="" class="number_entry_box"></td>
+                    </tr>
+                </tbody>
+            </table>
+    
+            <div class="nav contentLink justify-content-center">
+                <a class="nav-link" id="calculateButton" onclick="gradeAverageBasic()" style="cursor: pointer;">calculate</a>
+            </div>
+
+            <a class="nav-link" id="calculateButton" onclick="" style="cursor: pointer; text-align: right;" data-toggle="collapse" data-target="#options">optional input</a>
+            <div id='options' class="collapse">
+                <table>
+                    <tr>
+                        <td>What will my average be if I get <input type="number" id="oscore_1" name="o_score_1" value="" class="number_entry_box"> % on the remaining assignments?</td>
+                    </tr>
+                    <tr>
+                        <td>What do I need on the remaining assignments to finish with <input type="number" id="oscore_2" name="o_score_2" value="" class="number_entry_box">% ?</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="results" style="visibility: hidden;"> 
+            <h2>Your current average is <span id="average"></span></h2>
+            <h6><span id="optionalOutput1"></span></h6>
+            <h6><span id="optionalOutput2"></span></h6>
+            <a class="nav-link" id="calculateButton" onclick="location.reload()" style="cursor: pointer;">go back</a>
+        </div>
+    </main>
+
+        <main role="main" class="inner cover" id="gpaCalc" style="display:none">  
+            <div id="gpaTable">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <div id="radiosGPA">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="GPASwitch" id="fourGPA" value="fourGPACalc" checked onchange="buttonValue()">
+                                    <label class="form-check-label" for="courseRadio">
+                                        4.0 GPA
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="GPASwitch" id="twlvGPA" value="twlvGPACalc" onchange="buttonValue()">
+                                    <label class="form-check-label" for="GPARadio">
+                                        12 Pt. GPA
+                                    </label>
+                                </div>
+                            </div>
+                        </tr>
+                    </thead>
+                </table>      
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Course</th>
+                            <th scope="col">Final Grade (%)</th>
+                            <th scope="col">Credits</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td><input type="number" id="gscore" name="g_score_1" value="" class="number_entry_box"></td>
+                            <td><input type="number" id="gweight" name="g_weight_1" value="" class="number_entry_box"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td><input type="number" id="gscore" name="g_score_2" value="" class="number_entry_box"></td>
+                            <td><input type="number" id="gweight" name="g_weight_2" value="" class="number_entry_box"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td><input type="number" id="gscore" name="g_score_3" value="" class="number_entry_box"></td>
+                            <td><input type="number" id="gweight" name="g_weight_3" value="" class="number_entry_box"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td><input type="number" id="gscore" name="g_score_4" value="" class="number_entry_box"></td>
+                            <td><input type="number" id="gweight" name="g_weight_4" value="" class="number_entry_box"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td><input type="number" id="gscore" name="g_score_5" value="" class="number_entry_box"></td>
+                            <td><input type="number" id="gweight" name="g_weight_5" value="" class="number_entry_box"></td>
+                        </tr>
+                        <p id="twlvNote" style="visibility: hidden;">The 12 point calculator weighs all courses at 0.5 credits.</p>
+                    </tbody>
+                </table>
+        
+                <div class="nav contentLink justify-content-center">
+                    <a class="nav-link" id="calculateButton" onclick="callGPA()" value="" style="cursor: pointer;">calculate</a>
+                </div>
+    
+                <!-- <a class="nav-link" id="calculateButton" onclick="" style="cursor: pointer; text-align: right;" data-toggle="collapse" data-target="#options">optional input</a>
+                <div id='options' class="collapse">
+                    <table>
+                        <tr>
+                            <td>What will my average be if I get <input type="number" id="oscore_1" name="o_score_1" value="" class="number_entry_box"> % on the remaining assignments?</td>
+                        </tr>
+                        <tr>
+                            <td>What do I need on the remaining assignments to finish with <input type="number" id="oscore_2" name="o_score_2" value="" class="number_entry_box">% ?</td>
+                        </tr>
+                    </table>
+                </div> -->
+            </div>
+    
+            <div id="gpaResults" style="visibility: hidden;"> 
+                <h2><span id="GPA"></span></h2>
+                <h6><span id="optionalOutput1"></span></h6>
+                <h6><span id="optionalOutput2"></span></h6>
+                <a class="nav-link" id="calculateButton" onclick="location.reload()" style="cursor: pointer;">go back</a>
+            </div>
+        </main>
+
+    </div>
+        
+    <!-- footer -->
+    <footer class="mastfoot mt-auto">
+        <div class="inner foottxt">
+            <p>(c) 2020</p>
+        </div>
+    </footer>
+    </div>
+</body>
+</html>

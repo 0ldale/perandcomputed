@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+   
+    <title>per&computed</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./css/perComp.css" rel="stylesheet">
+    <link href="./css/fade.css" rel="stylesheet">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.24.0/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.24.0/firebase-auth.js"></script>
+    <!-- <script defer src="/__/firebase/7.24.0/firebase-database.js"></script> -->
+    <script defer src="/__/firebase/7.24.0/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/7.24.0/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.24.0/firebase-storage.js"></script>
+    <script defer src="/__/firebase/7.24.0/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/7.24.0/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/7.24.0/firebase-performance.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <!-- javascript files -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/perComp.js"></script>    
+    <script src="/js/process.js"></script>
+    <script src="./app.js"></script>
+  </head>
+  <body class="text-center">
+    <script>
+      var currUser;
+      document.addEventListener("DOMContentLoaded", event =>{
+          firebase.auth().onAuthStateChanged(firebaseUser => {
+          if(!firebaseUser){
+              window.location.href = "login.html";
+          } else {
+            currUser = firebaseUser;
+            document.getElementById("userName").innerHTML = currUser.displayName;
+          }
+      })
+  });
+  </script>
+    <!-- <script src="app.js"></script> -->
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+ 
+      <!-- top head -g -->
+      <header class="masthead mb-auto">
+      <div class="inner">
+        <h3 class="masthead-brand">per&computed</h3>
+        <nav class="nav nav-masthead justify-content-center">
+          <a class="nav-link active" href="memberIndex.html">home</a>
+          <a class="nav-link" href="courses.html">courses</a>
+          <a class="nav-link" href="calculate.html">calculators</a>
+          <a class="nav-link" href="settings.html">settings</a>
+        <a class="nav-link" id="logoutUserLink" onclick="logoutUser()">logoff</a>
+        </nav>
+      </div>
+      </header>
+  
+      <!-- main content -->
+      <h2 style="margin-bottom: 15%;" class="mainFade">Welcome back, <span id="userName"></span></h2>
+          
+<!-- footer -->
+<footer class="mastfoot mt-auto">
+  <div class="inner">
+      <p>(c) 2020</p>
+  </div>
+</footer>
+      </div>
+ </body>
+ </html>
